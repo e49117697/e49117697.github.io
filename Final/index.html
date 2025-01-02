@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期末專案</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<script src="assets/js/cart.js" defer></script>
+<script src="assets/js/page.js" defer></script>
+<script src="assets/js/profile.js" defer></script>
+<script src="assets/js/rating.js" defer></script>
+<body>
+  <!-- 導覽列 -->
+  <header>
+    <h1>MyClothes買衣網</h1>
+    <nav>
+      <ul>
+        <li data-target="home">首頁</li>
+        <li class="dropdown" data-target="product">
+          商品
+          <ul class="dropdown-menu">
+            <li data-category="all">全部</li>
+            <li data-category="top">上衣</li>
+            <li data-category="bottom">下身</li>
+            <li data-category="accessories">配件</li>            
+          </ul>
+        </li>
+        <li data-target="about">關於我們</li>
+        <li id="cartBtn">購物車<img src="assets/images/icon/cart.png" width="18" height="18"></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      
+      <button id="profileBtn">會員資料</button>
+      <button id="loginBtn">登入</button>
+      <button id="registerBtn">註冊</button>
+    </div>
+  </header>
+
+
+  <!-- 登入介面 -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" style="color: white;">關閉</span>
+      <h2>會員登入</h2>
+      <form id="loginForm">
+          <label for="username">帳號：</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">密碼：</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">登入</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 註冊介面 -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn register-close-btn" style="color: white;">關閉</span>
+      <h2>註冊會員</h2>
+      <form id="registerForm">
+        <label for="regUsername">帳號：</label>
+        <input type="text" id="regUsername" name="regUsername" required>
+        <label for="regPassword">密碼：</label>
+        <input type="password" id="regPassword" name="regPassword" required>
+        <label for="checkPassword">確認密碼：</label>
+        <input type="password" id="checkPassword" name="checkPassword" required>
+        <button type="submit">確定</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 會員資料介面 -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn profile-close-btn" style="color: white;">關閉</span>
+        <h2>會員資料</h2>
+        <div id="memberInfo">
+          <p><strong>帳號：</strong><span id="profileUsername">尚未登入</span></p>
+          <p><strong>密碼：</strong><span id="profilePassword">尚未登入</span></p>
+        </div>
+        <div id="history">
+            <h3>消費紀錄</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>商品</th>
+                        <th>數量</th>
+                        <th>金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-02-12</td>
+                        <td>基本T恤</td>
+                        <td>2</td>
+                        <td>NT$598</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button id="logoutBtn" style="display: none;" >登出</button>
+    </div>
+  </div>
+  
+  <!-- 購物車介面 -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn cart-close-btn" style="color: white;">關閉</span>
+      <h2>購物車</h2>
+      <div id="cartItems">
+        <table>
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th>單價</th>
+              <th>數量</th>
+              <th>小計</th>
+              <th>更改</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 購買資訊 -->
+            <tr>
+              <td>基本T恤</td>
+              <td>NT$299</td>
+              <td>
+                <input type="number" value="1" min="1" max="10" onchange="updateCartTotal()">
+              </td>
+              <td class="subtotal">NT$299</td>
+              <td>
+                <button onclick="removeFromCart(this)">移除</button>
+              </td>
+            </tr>
+            <tr>
+              <td>毛帽</td>
+              <td>NT$199</td>
+              <td>
+                <input type="number" value="1" min="1" max="10" onchange="updateCartTotal()">
+              </td>
+              <td class="subtotal">NT$199</td>
+              <td>
+                <button onclick="removeFromCart(this)">移除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="totalAmount">總金額：NT$299</h3>
+        <button onclick="buy()">購買</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="home" class="page">
+    <!-- 廣告欄 -->
+    <div class="slideshow-container">
+      <div class="mySlides fade">          
+        <img src="assets/images/ad/ad1.jpg" style="width:100%">          
+      </div>
+      <div class="mySlides fade">          
+        <img src="assets/images/ad/ad2.jpg" style="width:100%">          
+      </div>
+      <div class="mySlides fade">         
+        <img src="assets/images/ad/ad3.jpg" style="width:100%">          
+      </div>
+      <div class="prev" onclick="plusSlides(-1)">❮</div>
+      <div class="next" onclick="plusSlides(1)">❯</div>
+    </div>      
+
+    <!-- 商品展示區 -->
+    <div class="container">
+      <h2>推薦商品</h2>
+      <div class="product-grid" id="productGrid">
+          <div class="product-card" data-category="top">
+              <img src="assets/images/product/shirt1.jpg" alt="商品圖片">
+              <h3>基本T恤</h3>
+              <p>舒適的日常穿著</p>
+              <p>任何時候都能穿</p>
+              <p class="price">NT$ 199</p>
+              <button onclick="addToCart('基本T恤', 199)">加入購物車</button>
+              <button onclick="view('基本T恤')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="bottom">
+              <img src="assets/images/product/Pants.jpg" alt="商品圖片">
+              <h3>休閒長褲</h3>
+              <p>舒適的日常穿著</p>
+              <p>方便寬鬆</p>
+              <p class="price">NT$ 599</p>
+              <button onclick="addToCart('休閒長褲', 599)">加入購物車</button>
+              <button onclick="view('休閒長褲')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="accessories">
+              <img src="assets/images/product/cotton_hat.jpg" alt="商品圖片">
+              <h3>毛帽</h3>
+              <p>冬季必備</p>
+              <p>毛質舒服，很抗寒</p>
+              <p class="price">NT$ 199</p>
+              <button onclick="addToCart('毛帽', 199)">加入購物車</button>
+              <button onclick="view('毛帽')">查看評價</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="product" class="page">
+    <div class="container">
+      <h2>商品</h2>
+      <div class="product-grid" id="productGrid" data-category="all">
+          <div class="product-card" data-category="top">
+              <img src="assets/images/product/shirt1.jpg" alt="商品圖片">
+              <h3>基本T恤</h3>
+              <p>舒適的日常穿著</p>
+              <p>任何時候都能穿</p>
+              <p class="price">NT$ 199</p>
+              <button onclick="addToCart('基本T恤', 199)">加入購物車</button>
+              <button onclick="view('基本T恤')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="top">
+              <img src="assets/images/product/shirt2.jpg" alt="商品圖片">
+              <h3>條紋襯衫</h3>
+              <p>簡單線條，整齊有致</p>
+              <p class="price">NT$ 230</p>
+              <button onclick="addToCart('條紋襯衫', 230)">加入購物車</button>
+              <button onclick="view('條紋襯衫')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="bottom">
+              <img src="assets/images/product/Pants.jpg" alt="商品圖片">
+              <h3>休閒長褲</h3>
+              <p>舒適的日常穿著</p>
+              <p>方便寬鬆</p>
+              <p class="price">NT$ 599</p>
+              <button onclick="addToCart('休閒長褲', 599)">加入購物車</button>
+              <button onclick="view('休閒長褲')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="accessories">
+              <img src="assets/images/product/cotton_hat.jpg" alt="商品圖片">
+              <h3>毛帽</h3>
+              <p>冬季必備</p>
+              <p>毛質舒服，很抗寒</p>
+              <p class="price">NT$ 199</p>
+              <button onclick="addToCart('毛帽', 199)">加入購物車</button>
+              <button onclick="view('毛帽')">查看評價</button>
+          </div>
+          <div class="product-card" data-category="accessories">
+            <img src="assets/images/product/scarf.jpg" alt="商品圖片">
+            <h3>流蘇圍巾</h3>
+            <p>圍著暖暖ㄉ</p>
+            <p>時尚設計，增加質感</p>
+            <p class="price">NT$ 499</p>
+            <button onclick="addToCart('流蘇圍巾', 499)">加入購物車</button>
+            <button onclick="view('流蘇圍巾')">查看評價</button>
+        </div>
+        <div class="product-card" data-category="accessories">
+          <img src="assets/images/product/cap.jpg" alt="商品圖片">
+          <h3>鴨舌帽</h3>
+          <p>素色簡約</p>
+          <p>還能夠遮陽</p>
+          <p class="price">NT$ 120</p>
+          <button onclick="addToCart('鴨舌帽', 120)">加入購物車</button>
+          <button onclick="view('鴨舌帽')">查看評價</button>
+        </div>
+        <div class="product-card" data-category="bottom">
+          <img src="assets/images/product/jeans.jpg" alt="商品圖片">
+          <h3>彈性牛仔褲</h3>
+          <p>窄褲筒，修身纖細</p>
+          <p>有彈性纖維</p>
+          <p class="price">NT$ 350</p>
+          <button onclick="addToCart('彈性牛仔褲', 350)">加入購物車</button>
+          <button onclick="view('彈性牛仔褲')">查看評價</button>
+        </div>
+        <div class="product-card" data-category="bottom">
+          <img src="assets/images/product/long_skirt.jpg" alt="商品圖片">
+          <h3>長裙</h3>
+          <p>舒適透氣</p>
+          <p>春季暖色系</p>
+          <p class="price">NT$ 399</p>
+          <button onclick="addToCart('長裙', 399)">加入購物車</button>
+          <button onclick="view('長裙')">查看評價</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 評論區 -->
+  <div id="reviewModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn " onclick="closeView()" style="color: white;">關閉</span>
+      <h2 id="reviewProductTitle">商品名稱</h2>
+      <h3>評價</h3>
+      <div id="reviewContainer">
+        <!-- 其他人的評價 -->
+      </div>
+      <h4>留言</h4>
+      <textarea id="reviewComment" placeholder="撰寫評論"></textarea>
+      <div class="rating">
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1" title="1 star">&#9733;</label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2" title="2 stars">&#9733;</label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3" title="3 stars">&#9733;</label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4" title="4 stars">&#9733;</label>
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5" title="5 stars">&#9733;</label>
+      </div>
+      <button onclick="submitReview()">提交評論</button>
+    </div>
+  </div>
+
+  <div id="about" class="page">
+    <section>
+      <h2 class="section-title">關於我們</h2>
+      <p>這裡是 MyClothes 買衣網！提供多樣大眾款式的服飾。</p>
+      <p>我們的目標是滿足所有顧客的需求，並持續推出新產品！</p>
+    </section>
+    
+    <section>
+      <h2 class="section-title">經營理念</h2>
+      <p>MyClothes 以簡單樸素為主格調，希望能讓所有人放鬆下來。</p>
+      <p>提供好品質，保證讓顧客穿上好商品。</p>
+    </section>
+    
+    <section class="fb-section">
+      <h2 class="section-title">給我們意見</h2>
+      <p>如果有任何建議或意見，歡迎在下方告訴我們！</p>
+      <form id="feedbackForm">
+        <label for="feedback">意見回饋：</label>
+        <textarea id="feedback" name="feedback" rows="4" required></textarea>
+        <button type="submit">提交</button>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <p>@MyClothes買衣網 - 期末實作</p>
+  </footer>
+</body>
+</html>

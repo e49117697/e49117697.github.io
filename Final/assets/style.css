@@ -1,0 +1,403 @@
+/* 全域樣式 */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #72ac74;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px black;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+
+.page {
+  display: none; /* 預設隱藏所有頁面 */
+}
+.page.active {
+  display: block; /* 僅顯示啟用的頁面 */
+}
+
+/* 導覽列樣式 */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  nav ul li {
+    position: relative;
+    margin-left: 10px;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 20px;
+  }
+  
+  nav ul li:hover {
+    color: black;
+    border-bottom: 2px solid #96FED1;
+  }
+  
+  /* 子選單樣式 */
+  nav ul li.dropdown {
+    position: relative;
+  }
+  
+  nav ul li .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px 0;
+    list-style: none;
+    z-index: 1000;
+  }
+  
+  nav ul li .dropdown-menu li {
+    margin: 0;
+    color: gray;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  nav ul li .dropdown-menu li:hover {
+    background-color: #f0f0f0;
+    color: black;
+  }
+  
+  /* 當滑鼠停在導覽列的選項時，顯示子選單 */
+  nav ul li.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+.container {
+  padding: 60px;
+}
+
+/*關於我們頁面排版*/
+section {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #46b074;
+    text-align: center;
+    border-bottom: 2px solid #46b074;
+    padding-bottom: 5px;
+  }
+
+  p {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+form {
+    margin-top: 15px;
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 14px;
+  }
+
+  form button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  form button:hover {
+    background-color: #003d80;
+  }
+
+footer{
+  background-color: #96FED1;
+  text-align: center;
+  padding: 10px;
+}
+
+/*商品版面*/
+.product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .product-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit:scale-down;
+    }
+
+    .product-card h3 {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .product-card p {
+        margin: 5px 0;
+        color: #666;
+    }
+
+    .product-card .price {
+        font-weight: bold;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .product-card button {
+        padding: 10px 15px;
+        background-color: #53b6d7;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .product-card button:hover {
+        background-color: #35778d;
+    }
+
+.auth-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .auth-buttons button {
+        padding: 10px 20px;
+        background-color: #00ffea00;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 17px;
+    }
+
+    .auth-buttons button:hover {
+        background-color: #0056b3;
+    }
+
+/* 彈出視窗排版 */
+.modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 30px;
+        border-radius: 10px;
+        width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
+        margin-bottom: 20px;
+    }
+
+    .modal-content input {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .modal-content button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modal-content button:hover {
+        background-color: #218838;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 30px;
+        font-weight: bold;
+        color: #000;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: red;
+    }
+
+  /* 會員資料和購物車通用排版 */
+  .modal-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    
+    .modal-content table th, 
+    .modal-content table td {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+    }
+    
+    .modal-content table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    
+    .modal-content input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+/*評分用的星星動態*/
+.rating {
+      direction: rtl;
+      unicode-bidi: bidi-override;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    
+    .rating input[type="radio"] {
+      display: none;
+    }
+    
+    .rating label {
+      font-size: 24px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    
+    .rating label:hover,
+    .rating label:hover ~ label,
+    .rating input[type="radio"]:checked ~ label {
+      color: #f5b301;
+    }
+
+/*固定留言格大小*/
+textarea {
+  height: 100px; 
+  resize: none; 
+  box-sizing: border-box; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;  
+}
+    
+/* 廣告區樣式 */
+.slideshow-container {
+      margin: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+  .mySlides img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+  }
+
+  /*按鍵設計*/
+  .prev, .next{
+    position: absolute;
+    top: 50%;
+    padding: 20px;
+    width: auto;
+
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 3px;
+    transition: 0.6s ease;
+  }
+
+  .next{
+    right: 0px;
+  }
+
+  .prev:hover, .next:hover{
+    background-color: rgb(202, 179, 121);
+  }
+
+  /*照片動畫*/
+  .mySlides{
+    animation: fade;
+    animation-duration: 1.0s;
+  }
+
+  @keyframes fade{
+    from {opacity: 0.4;}
+    to {opacity: 1;}
+  }
