@@ -15,12 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loginModal.style.display = 'none';
     });
 
-    window.addEventListener('click', (e) => {
-        if (e.target === loginModal) {
-            loginModal.style.display = 'none';
-        }
-    });
-
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -51,12 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     registerCloseBtn.addEventListener('click', () => {
         registerModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === registerModal) {
-            registerModal.style.display = 'none';
-        }
     });
 
     const registerForm = document.getElementById('registerForm');
@@ -103,12 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     profileCloseBtn.addEventListener('click', () => {
         profileModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === profileModal) {
-            profileModal.style.display = 'none';
-        }
     });
 
     // 登出功能
