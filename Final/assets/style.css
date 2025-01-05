@@ -1,10 +1,13 @@
 /* 全域樣式 */
-body {
-  font-family: 'Roboto', sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 header {
@@ -95,6 +98,7 @@ nav ul {
 
 /*關於我們頁面排版*/
 section {
+    font-size: 20px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -104,7 +108,7 @@ section {
   }
 
   .section-title {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 10px;
     color: #46b074;
     text-align: center;
@@ -117,6 +121,7 @@ section {
     text-align: center;
   }
 
+/*意見回饋排版*/
 form {
     margin-top: 15px;
   }
@@ -152,11 +157,12 @@ form {
     background-color: #003d80;
   }
 
-footer{
-  background-color: #96FED1;
-  text-align: center;
-  padding: 10px;
-}
+  footer {
+    background-color: #96FED1;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
 
 /*商品版面*/
 .product-grid {
@@ -236,28 +242,40 @@ footer{
 
 /* 彈出視窗排版 */
 .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6); /* 加深透明度 */
     }
 
+
+    /* 彈出視窗調整 */
     .modal-content {
-        background-color: #fff;
-        margin: 10% auto;
-        padding: 30px;
-        border-radius: 10px;
-        width: 400px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+      margin: 5% auto; 
+      padding: 30px;
+      border-radius: 10px;
+      width: 600px; 
+      max-height: 80vh; 
+      overflow-y: auto;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .modal-content h2 {
         margin-bottom: 20px;
+    }
+    
+    .modal-content img{
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-width: 200px;
+      max-height: 200px; 
     }
 
     .modal-content input {
@@ -287,7 +305,7 @@ footer{
         right: 15px;
         font-size: 30px;
         font-weight: bold;
-        color: #000;
+        color: white;
         cursor: pointer;
     }
 
@@ -296,30 +314,31 @@ footer{
     }
 
   /* 會員資料和購物車通用排版 */
-  .modal-content table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
+    .modal-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
     }
     
-    .modal-content table th, 
+    .modal-content table th,
     .modal-content table td {
-      border: 1px solid #ddd;
-      padding: 15px;
-      text-align: center;
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        font-size: 16px;
     }
     
     .modal-content table th {
-      background-color: #f2f2f2;
-      font-weight: bold;
+        background-color: #f2f2f2;
+        font-weight: bold;
     }
     
     .modal-content input[type="number"] {
-      width: 60px;
-      padding: 5px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+        width: 50px; 
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
 /*評分用的星星動態*/
@@ -355,6 +374,58 @@ textarea {
   border: 1px solid #ccc; 
   border-radius: 5px;  
 }
+
+.group{
+  border: 2px solid black;
+  background-color: rgb(194, 222, 194);
+}
+
+/* 組員卡片容器 */
+.group-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  /* 單個卡片設計 */
+  .mate-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin: 60px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* 卡片圖片 */
+  .mate-photo {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 2px solid #46b074;
+  }
+
+  /* 組員名字 */
+  .mate-name {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+  }
+
+  /* 組員介紹文字 */
+  .mate-intro {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+  }
+
     
 /* 廣告區樣式 */
 .slideshow-container {
@@ -391,7 +462,7 @@ textarea {
     background-color: rgb(202, 179, 121);
   }
 
-  /*照片動畫*/
+  /*廣告動畫*/
   .mySlides{
     animation: fade;
     animation-duration: 1.0s;
