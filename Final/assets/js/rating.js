@@ -29,10 +29,13 @@ let productReviews = {
         ]
     };
   
-//打開商品評價
-function view(productName) {
+//打開商品視窗
+function view(productName,productImg,productIntro,productPrice) {
         const modal = document.getElementById("reviewModal");
-        document.getElementById("reviewProductTitle").innerText = productName;
+        document.getElementById("pTitle").innerText = productName;
+        document.getElementById("pImg").src = productImg;
+        document.getElementById("pIntro").innerText = productIntro;
+        document.getElementById("pPrice").innerText = productPrice;
     
         // 顯示該商品的評論
         const reviewContainer = document.getElementById("reviewContainer");
@@ -42,50 +45,42 @@ function view(productName) {
             reviews.forEach((review) => {
             const reviewDiv = document.createElement("div");
             reviewDiv.classList.add("review");
-            reviewDiv.innerHTML = `<strong>${review.rating} 星</strong><p>${review.comment}</p>`;
+            reviewDiv.innerHTML = `<p><strong>${review.rating} 星</strong> --- ${review.comment}</p>`;
             reviewContainer.appendChild(reviewDiv);
             });
-        } else {
-            reviewContainer.innerHTML = "<p>尚無評論，成為第一個評論的人！</p>";
-        }
+        } 
 
         modal.style.display = "block";
     }
   
-// 關閉商品評價
+// 關閉商品視窗
 function closeView() {
         const modal = document.getElementById("reviewModal");
         modal.style.display = "none";
         }
 
+// 提交評論
 function submitReview() {
-        const productName = document.getElementById("reviewProductTitle").innerText;
-        const reviewComment = document.getElementById("reviewComment").value;
-        
-        // 取得選中的評分值
-        const ratingElements = document.getElementsByName("rating");
-        let reviewRating = 0;
-        for (const rating of ratingElements) {
-            if (rating.checked) {
-            reviewRating = parseInt(rating.value);
-            break;
-            }
-        }
-        
-        if (!reviewComment.trim()) {
-            alert("請撰寫評論！");
-            return;
-        }
-        
-        if (reviewRating === 0) {
-            alert("請選擇評分！");
-            return;
-        }
-        
-        // 清空輸入欄位
-        document.getElementById("reviewComment").value = "";
-        ratingElements.forEach((rating) => (rating.checked = false));
-        
-        alert("感謝評論！");
+    const productName = document.getElementById("pTitle").textContent;
+    const comment = document.getElementById("reviewComment").value;
+    const rating = document.querySelector('input[name="rating"]:checked').value;
+
+    if (!comment || !rating) {
+        alert("請完成所有欄位！");
+        return;
     }
+
+    // 新增評論
+    if (!productReviews[productName]) {
+        productReviews[productName] = [];
+    }
+    productReviews[productName].push({ rating: parseInt(rating), comment });
+
+    // 清空輸入
+    document.getElementById("reviewComment").value = "";
+    document.querySelector("input[name='rating']:checked").checked = false;
+
+    // 更新評論顯示
+    view(productName, document.getElementById("pImg").src, document.getElementById("pIntro").innerText,document.getElementById("pPrice").innerText);
+}
   
